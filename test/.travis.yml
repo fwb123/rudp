@@ -1,5 +1,7 @@
 language: python
 python:
   - "3.6"
-# command to install dependencies
+install:
+  - pip install pycontracts
+
 script: python3 -m unittest discover -s test -p "*_test.py"
