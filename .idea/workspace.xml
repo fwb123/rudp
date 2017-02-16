@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04e621a2-e3c2-49fe-b047-02d414f641d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VM.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/VM_Message.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/vn_message_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Addr.py" afterPath="$PROJECT_DIR$/Addr.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BindContext.py" afterPath="$PROJECT_DIR$/BindContext.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Packet.py" afterPath="$PROJECT_DIR$/Packet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RUDPSocket.py" afterPath="$PROJECT_DIR$/RUDPSocket.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VN.py" afterPath="$PROJECT_DIR$/VN.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -66,10 +58,10 @@
         </entry>
       </file>
       <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/.travis.yml">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
-              <caret line="4" column="59" lean-forward="false" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
+              <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -256,6 +248,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager" selected="Python tests.Unittests in vn_message_test">
     <configuration default="false" name="Addr" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -573,7 +570,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/.travis.yml">
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -740,10 +737,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/.travis.yml">
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
-          <caret line="4" column="59" lean-forward="false" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
+          <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
           <folding />
         </state>
       </provider>
