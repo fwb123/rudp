@@ -3,5 +3,4 @@ python:
   - "3.6"
 install:
   - pip install pycontracts
-
 script: python3 -m unittest discover -s test -p "*_test.py"
