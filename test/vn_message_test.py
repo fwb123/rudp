@@ -1,10 +1,6 @@
 import unittest
-import struct
-import sys
-
-sys.path.append('../')
-
 import contracts
+
 from VM_Message import VM_Message
 
 
@@ -34,19 +30,15 @@ class MessageTestCase(unittest.TestCase):
         with self.assertRaises(contracts.interface.ContractNotRespected):
             msg.set_payload(4)
 
-
     def test_set_payload_none(self):
         msg = VM_Message()
         with self.assertRaises(contracts.interface.ContractNotRespected):
             msg.set_payload(None)
 
-
-
     def test_pack(self):
         msg = VM_Message()
         msg.set_type(VM_Message.Type.WRITE)
         msg.set_payload("hello")
-        print(msg.payload)
         data = msg.pack()
         target = b'\x00\x00\x00\n\x01hello'
         self.assertEqual(data, target)
@@ -63,7 +55,6 @@ class MessageTestCase(unittest.TestCase):
         msg = VM_Message.unpack_header(raw)
         self.assertEqual(msg.payload_length, 5)
         self.assertEqual(msg.type, VM_Message.Type.WRITE)
-
 
 
 if __name__ == "__main__":

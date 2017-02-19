@@ -14,6 +14,10 @@ class VM(object):
         self.inputs = [self.sock]
         self.outputs = []
 
+        self.read_buffer = {}
+        self.write_buffer = {}
+
+
     def ioloop_start(self):
         while True:
             readable, writable, exceptional = \
@@ -26,12 +30,27 @@ class VM(object):
 
                     client.setblocking(0)
                     self.inputs.append(client)
+                    self.read_buffer[sock] = ""
+                    self.write_buffer[sock] = ""
+
                 else:
                     # internal message
-                    data = b""
-                    data += sock.recv(VM_Message.HEADER_SIZE)
+                    msg = VM.read_message(sock)
+                    if msg.type == VM_Message.Type.WRITE:
+                        self.write_buffer[sock] += msg.payload
+                    elif:
+                        msg.type == VM_Message.Type.READ:
 
-                    print(data)
+
+    @staticmethod
+    def read_message(sock : socket.socket) -> VM_Message:
+        data = b""
+        data += sock.recv(VM_Message.HEADER_SIZE)
+        msg = VM_Message.unpack_header(data)
+        data += sock.recv(msg.payload_length)
+        return VM_Message.unpack(data)
+
+
 
     def __del__(self):
         self.sock.close()
