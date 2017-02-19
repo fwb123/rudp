@@ -1,6 +1,7 @@
 import hashlib
 import struct
 
+
 class Packet:
     """
         Protocol
@@ -84,8 +85,7 @@ class Packet:
         return data
 
     @staticmethod
-    def compute_checksum(msg : 'Packet'):
-
+    def compute_checksum(msg: 'Packet'):
         data = struct.pack("!IIHHIB7s32s%ss" % msg.payload_length,
                            msg.SEQ, msg.ACK, msg.src_port,
                            msg.dest_port, msg.payload_length,
@@ -94,7 +94,7 @@ class Packet:
         return hashlib.md5(data).hexdigest()
 
     @staticmethod
-    def unpack(raw : 'Packet'):
+    def unpack(raw: 'Packet'):
         msg = Packet()
         (msg.SEQ, msg.ACK, msg.src_port,
          msg.dest_port, msg.payload_length,

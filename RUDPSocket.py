@@ -1,47 +1,80 @@
+import random
+import socket
+
+from contracts import contract
+
+from VM_Message import VM_Message
+from VM import VM
+
 class RUDPSocket:
     def __init__(self):
-        self.bound = False
+        self.iface = None
         self.port = 0
         self.listen = 0
-        self.sock_id = uuid.uuid4()
-        instance.add_socket(self)
+        self.bound = False
 
-    def listen(n):
-        # precondition
-        assert n >= 0
+        self.interface = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        self.interface.connect("/tmp/RUDP_VM.sock")
+
+
+    @contract(n='int,>0,<65536')
+    def listen(self, n : int):
         self.listen = n
 
-    def bind(self, context=None):
+
+    @contract
+    def active_bind(self, iface : str, port : int):
+        b_context = (iface, port)
+        payload = dict(
+            action="is_bindable",
+            data=b_context
+        )
+        msg = VM_Message(payload)
+        self.interface.send(msg.pack())
+        resp = VM.read_message(self.interface).payload
+        if resp["status"] == 0:
+            payload = dict(
+                action="bind",
+                data=b_context
+            )
+            msg = VM_Message(payload)
+            self.interface.send(msg.pack())
+            resp = VM.read_message(self.interface).payload
+            if resp["status"] != 0:
+                raise Exception(resp["message"])
+        else:
+            raise ValueError("Not bindable")
+
+
+    @contract
+    def bind(self, context : tuple):
         """
             context: <iface, port>
         """
         # precondition
         assert self.bound == False
         assert self.port == 0
+        assert len(context) <= 2
 
-        if context:
-            # precondition
-            assert type(context) == tuple
-            assert len(context) == 1
-            assert type(context[0]) == int
+        #Active bind
+        if len(context) == 2:
+            iface, port = context
+            self.active_bind(iface, port)
+            self.port = port
+        else:
+            iface, = context
+            done = False
+            while not done:
+                port = random.randrange(0, 2 ** 16 - 1)
+                try:
+                    self.active_bind(iface, port)
+                    done = True
+                    self.port = port
+                except ValueError:
+                    done = False
+                    self.port = 0
 
-            b_context = BindContext(self.sock_id, context[0])
-            if instance.bindable(b_context):
-                instance.bind(b_context)
-                self.bound = True
-                self.port = context[0]
-            else:
-                raise Exception("Binding failed")
-            return
-
-        port = 0
-        while port == 0:
-            port = random.randrange(0, 2 ** 16 - 1)
-            b_context = BindContext(self.sock_id, port)
-            if instance.bindable(b_context):
-                instance.bind(b_context)
-                self.bound = True
-                self.port = port
+        self.bound = True
 
     def read(self, buff_size):
         # precondition
@@ -60,12 +93,8 @@ class RUDPSocket:
             addr: <ip, port>
         """
         # precondition:
-        assert type(addr) == tuple
-        assert len(addr) == 2
-        assert type(addr[0]) == str
-        assert type(addr[1]) == int
+        pass
 
-        addr = VN.Addr(addr[0], addr[1])
 
     def close(self):
-        instance.remove_socket(self)
+        pass
