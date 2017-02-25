@@ -24,8 +24,8 @@ class VM_Message(object):
     @contract
     def __init__(self, payload : dict = {}):
         self.payload_length = 0
-        self.payload = payload
         self.nbytes = 0
+        self.set_payload(payload)
 
     @contract
     def set_payload(self, payload: dict):
@@ -45,10 +45,10 @@ class VM_Message(object):
     def unpack(raw: bytes) -> 'VM_Message':
         msg = VM_Message()
         payload_length = len(raw) - VM_Message.HEADER_SIZE
-        msg.payload_length, msg.payload = \
+        msg.payload_length, tmp_payload = \
             struct.unpack("!I{}s".format(payload_length), raw)
 
-        msg.payload = json.loads(msg.payload.decode("utf-8"))
+        msg.payload = json.loads(tmp_payload.decode("utf-8"))
         msg.payload_length -= VM_Message.HEADER_SIZE
 
         # print(raw, msg.payload_length, payload_length)
